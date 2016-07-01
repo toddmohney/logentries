@@ -1,4 +1,3 @@
--- TODO: Extract this entirely and push to Hackage
 module Network.Wai.Middleware.RequestLogger.LogEntries
   ( Config (..)
   , UUID
@@ -8,7 +7,13 @@ module Network.Wai.Middleware.RequestLogger.LogEntries
   ) where
 
 import Network.Wai
-import Network.Wai.Middleware.RequestLogger (RequestLoggerSettings (..), OutputFormat (..), Destination (..), IPAddrSource (..), mkRequestLogger)
+import Network.Wai.Middleware.RequestLogger
+  ( RequestLoggerSettings (..)
+  , OutputFormat (..)
+  , Destination (..)
+  , IPAddrSource (..)
+  , mkRequestLogger)
+import Network.Wai.Middleware.RequestLogger.Internal.Formatting (buildLogMessage)
 import qualified Data.ByteString.Char8 as BS8
 import Data.Default (def)
 import Data.Monoid ((<>))
@@ -67,12 +72,3 @@ openSocket AddrInfo{..} = do
   sock <- socket addrFamily Stream defaultProtocol
   connect sock addrAddress
   return sock
-
-buildLogMessage :: UUID -> LogStr -> String
-buildLogMessage token logStr =
-  (BS8.unpack . fromLogStr $ addToken token logStr) ++ "\n"
-
-addToken :: UUID -> LogStr -> LogStr
-addToken token logStr =
-  toLogStr $ (BS8.pack $ UUID.toString token) <> " " <> (fromLogStr logStr)
-
