@@ -31,7 +31,7 @@ data Config = Config
   { hostname :: String
   , port     :: Int
   , token    :: UUID
-  }
+  } deriving (Show)
 
 logEntriesLogger :: Config -> Middleware
 logEntriesLogger config = unsafePerformIO $ do
