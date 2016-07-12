@@ -1,8 +1,6 @@
 name:                logentries
 version:             0.1.0.1
-synopsis:            Initial project template from stack
-description:         Please see README.md
-homepage:            https://github.com/toddmohney/logentries#readme
+homepage:            https://github.com/toddmohney/logentries#README.md
 license:             BSD3
 license-file:        LICENSE
 author:              Todd Mohney
@@ -11,6 +9,24 @@ copyright:           2016 Todd Mohney
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
+stability:           experimental
+synopsis:            Request logger middleware for Logentries
+description:         Wai Middleware request logger for Logentries
+
+extra-source-files:
+  README.md
+  LICENSE
+  circle.yml
+  stack.yaml
+  example/LICENSE
+  example/README.md
+  example/example.cabal
+  example/*.hs
+  example/stack.yaml
+
+source-repository head
+  type: git
+  location: https://github.com/toddmohney/logentries.git
 
 library
   hs-source-dirs:      src

@@ -1,9 +1,12 @@
-# logentries
 
 ### Example Usage
 
+The example is a Servant application, but this package is compatible with any Wai application.
+
 The `logEntriesLogger` produces a chainable `Middleware` type
 which can be used in conjunction with any other `Middleware` type.
+
+The relevant code in the example is found in `src/Lib.hs`.
 
 ```Haskell
 -- The Middleware is chained to Servant's Application
@@ -18,8 +21,3 @@ requestLogger =
       logentriesConfig = Config "data.logentries.com" 80 token
   in logEntriesLogger logentriesConfig
 ```
-
-### Example Application
-
-A [Servant example](https://github.com/toddmohney/master/tree/add-example-app/example)
-can be found in the repo.

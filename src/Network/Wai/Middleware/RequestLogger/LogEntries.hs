@@ -1,7 +1,12 @@
+{- |
+  Entrypoint module for the package
+-}
 module Network.Wai.Middleware.RequestLogger.LogEntries
   ( Config (..)
-  , UUID
   , logEntriesLogger
+
+  -- UUID export to make configuration a bit easier
+  , UUID
   , UUID.fromString
   , UUID.nil
   ) where
@@ -27,12 +32,18 @@ import Control.Concurrent (forkIO)
 import Control.Exception (bracket)
 import qualified Control.Concurrent.STM as STM
 
+{- |
+  Account configuration
+-}
 data Config = Config
   { hostname :: String
   , port     :: Int
   , token    :: UUID
   } deriving (Show)
 
+{- |
+  Function to create the LogEntries Middleware
+-}
 logEntriesLogger :: Config -> Middleware
 logEntriesLogger config = unsafePerformIO $ do
   logChan <- STM.newTChanIO
